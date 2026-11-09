@@ -30,7 +30,8 @@ YtChat lets you chat with an AI about any YouTube video. It uses two Gemini AIs:
 ### 1. Clone the repository
 
 ```bash
-https://github.com/Yaswanth-824/YtChat-AiAgent.git
+git clone https://github.com/Yaswanth-824/YtChat-AiAgent.git
+cd YtChat-AiAgent
 
 
 ```
@@ -41,6 +42,7 @@ Create a `.env` file in the `server/` folder. Example:
 
 ```
 DB_URL=your_postgres_url
+API_URL=your_brightdata_api_url
 BRIGHTDATA_API_KEY=your_brightdata_key
 GEMINI_API_KEY_SUMMARIZER=your_gemini_key_1
 GEMINI_API_KEY_ANALYZER=your_gemini_key_2
@@ -52,24 +54,23 @@ GOOGLE_API_KEY=your_google_api_key
 ### 3. Install dependencies
 
 ```bash
-cd server
-npm install
-cd ../client
-npm install
+npm ci --prefix server
+npm ci --prefix client
 ```
 
 ### 4. Start the backend
 
 ```bash
-cd ../server
+cd server
 node index.js
 ```
 
 ### 5. Start the frontend
 
+In a second terminal, from the repository root:
+
 ```bash
-cd ../client
-npm run dev
+npm run dev --prefix client
 ```
 
 
@@ -79,7 +80,8 @@ npm run dev
 ## Notes
 
 - The backend uses **PostgreSQL** and BrightData for transcript scraping.
-- The frontend is built with React and Vite.
+- The frontend is built with React and Vite. Run `npm run build --prefix client` to build it into `client/dist/`.
+- The frontend reads `VITE_API_URL` at build time and defaults to `http://localhost:3000`. For a hosted chat UI, set that variable to the HTTPS API origin when it is available. Keep service credentials on the server.
 - For production, deploy the backend to a cloud service (Genezio, Vercel, Render, Railway, AWS, etc.)
 
 ---
