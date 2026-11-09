@@ -81,7 +81,7 @@ npm run dev --prefix client
 
 - The backend uses **PostgreSQL** and BrightData for transcript scraping.
 - The frontend is built with React and Vite. Run `npm run build --prefix client` to build it into `client/dist/`.
-- The current frontend calls an API at `http://localhost:3000`. A hosted frontend needs an explicit hosted API URL or a preview mode for the chat UI.
+- The frontend reads `VITE_API_URL` at build time and defaults to `http://localhost:3000`. For a hosted chat UI, set that variable to the HTTPS API origin when it is available. Keep service credentials on the server.
 - For production, deploy the backend to a cloud service (Genezio, Vercel, Render, Railway, AWS, etc.)
 
 ---
